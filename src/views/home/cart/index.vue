@@ -49,9 +49,7 @@ export default {
                 sn:element.sn
               })
           });
-          console.log('====================================');
           console.log(this.list);
-          console.log('====================================');
         })
       }
     },
