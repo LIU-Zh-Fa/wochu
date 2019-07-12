@@ -1,24 +1,26 @@
 <template>
     <div class="first">
-        <div class="top">
-            <div class="logo">
-                <img src="http://wmall.wochu.cn/h5/home/vueimg/wochuLogo.png">
-                <span>请填写地址 <img src="http://wmall.wochu.cn/h5/home/vueimg/icon.png"></span>
+        <div>
+            <div class="top">
+                <div class="logo">
+                    <img src="http://wmall.wochu.cn/h5/home/vueimg/wochuLogo.png">
+                    <span>请填写地址 <img src="http://wmall.wochu.cn/h5/home/vueimg/icon.png"></span>
+                </div>
+                <div class="search">
+                    <img src="http://wmall.wochu.cn/h5/home/vueimg/search.png">
+                </div>
             </div>
-            <div class="search">
-                <img src="http://wmall.wochu.cn/h5/home/vueimg/search.png">
+            <div class="topdiv">&nbsp;</div>
+            <topSwiper :list="bannerlist"/>
+            <topNav :navlist="navlist"/>
+            <div class="info" v-for="(item,index) in datalist" :key="index">
+                <News v-if="item.templateType === '14'" :itemobj="item"/>
+                <img v-if="item.templateType === '4'" :src="item.items[0].imgUrl" >
+                <ImgView v-if="item.templateType === '16'" :itemobj="item"/>
+                <OneGood v-if="item.templateType === '17'" :itemobj="item"/>
+                <ListOne v-if="item.templateType === '13'" :itemobj="item"/>
+                <ListTwo v-if="item.templateType === '7'" :itemobj="item"/>
             </div>
-        </div>
-        <div class="topdiv">&nbsp;</div>
-        <topSwiper :list="bannerlist"/>
-        <topNav :navlist="navlist"/>
-        <div class="info" v-for="(item,index) in datalist" :key="index">
-            <News v-if="item.templateType === '14'" :itemobj="item"/>
-            <img v-if="item.templateType === '4'" :src="item.items[0].imgUrl" >
-            <ImgView v-if="item.templateType === '16'" :itemobj="item"/>
-            <OneGood v-if="item.templateType === '17'" :itemobj="item"/>
-            <ListOne v-if="item.templateType === '13'" :itemobj="item"/>
-            <ListTwo v-if="item.templateType === '7'" :itemobj="item"/>
         </div>
     </div>
 </template>
@@ -31,6 +33,7 @@ import ImgView from './imgview'
 import OneGood from './onegood'
 import ListOne from './listone'
 import ListTwo from './listtwo'
+
 export default {
     components:{
         topSwiper,topNav,News,ImgView,OneGood,ListOne,ListTwo

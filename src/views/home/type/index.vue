@@ -1,24 +1,56 @@
 <template>
-  <div class="type">
-      <div class="top">
-          <img src="http://wmall.wochu.cn/h5/classify/img/icon-search-40@2x.png">
-          <div>支持首字母搜索</div>
-      </div>
-      <div class="fg"></div>
-      <div class="menu">
-          <ul class="menu_left">
-              <li 
-                v-for="(item,index) in parentList" 
-                :key="index" 
-                @click="changeMenu(item.id)"
-                :class="{'on':item.id === meunId}"
-            >{{item.name}}</li>
-          </ul>
-          <div class="menu_right">
-
-          </div>
-      </div>
-  </div>
+    <div class="type">
+        <div class="top">
+            <img src="http://wmall.wochu.cn/h5/classify/img/icon-search-40@2x.png">
+            <div>支持首字母搜索</div>
+        </div>
+        <div class="fg"></div>
+        <div class="menu">
+            <ul class="menu_left">
+                <li 
+                    v-for="(item,index) in parentList" 
+                    :key="index" 
+                    @click="changeMenu(item.id)"
+                    :class="{'active':item.id === menuId}"
+                ><p>{{item.name}}</p></li>
+            </ul>
+            <div class="menu_right">
+                <div class="tj_menu" v-if="menuId === -1">
+                    <div v-if="tjList[0]">
+                        <h3 class="tit" v-if="tjList[0]">{{tjList[0].name}}</h3>
+                        <ul>
+                            <li v-for="(item,index) in tjList[0].children" :key="index">
+                                <img :src="item.imgUrl">
+                                <p>{{item.name}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="fg"></div>
+                    <div v-if="tjList[1]">
+                        <h3 class="tit" v-if="tjList[1]">{{tjList[1].name}}</h3>
+                        <ul>
+                            <li v-for="(item,index) in tjList[1].children" :key="index">
+                                <img :src="item.imgUrl">
+                                <p>{{item.name}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="menu" 
+                    v-for="(meunobj,index) in menuList"
+                    v-if="meunobj.parentId === menuId"
+                    :key="index"
+                >
+                    <ul>
+                        <li v-for="(item,index) in meunobj.list" :key="index">
+                            <img :src="item.checkicon">
+                            <p>{{item.name}}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -27,7 +59,13 @@ export default {
         return{
             parentList:[],
             tjList:[],
-            menuList:[]
+            menuList:[],
+            menuId: -1,
+        }
+    },
+    methods:{
+        changeMenu(id){
+            this.menuId = id;
         }
     },
     created(){
@@ -122,10 +160,11 @@ export default {
                     line-height: .6rem;
                     text-align: center;
                     font-size: 14px;
-                    &.active{
+                    &.active p{
                         color: #6eb042;
                         font-size: 16px;
-                        height: 1.1rem;
+                        height: .6rem;
+                        border-left: .06rem solid #6eb042;
                     }
                 }
             }
@@ -134,6 +173,48 @@ export default {
                 border-left: .01rem solid #e5e5e5;
                 height: 100%;
                 overflow: auto;
+                .tj_menu{
+                    .tit{
+                        width: 100%;
+                        height: .9rem;
+                        line-height: .9rem;
+                        background: #fff;
+                        text-align: center;
+                        overflow: hidden;
+                    }
+                    >div{
+                        overflow: hidden;
+                    }
+                    .fg{
+                        width: 100%;
+                        height: .22rem;
+                        background: #f4f5f7;
+                    }
+                }
+                ul{
+                    width: 100%;
+                    padding: .2rem .02rem 0 .22rem;
+                    box-sizing: border-box;
+                    li{
+                        float: left;
+                        width: 1.58rem;
+                        margin-right: .22rem;
+                        height: 2.2rem;
+                        text-align: center;
+                        img{
+                            width: 1rem;
+                            height: 1rem;
+                        }
+                        p{
+                            height: .86rem;
+                            width: 1rem;
+                            color: #666;
+                            line-height: .34rem;
+                            padding-top: .2rem;
+                            margin: 0 auto;
+                        }
+                    }
+                }
             }
         }
     }
