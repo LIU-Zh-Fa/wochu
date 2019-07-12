@@ -36,7 +36,8 @@ export default {
         width: 100%;
         border-top: 1px solid #e5e5e5;
         padding: .08rem 0 .06rem;
-        height: .86rem;
+        height: 100%;
+        box-sizing: border-box;
         .active{
             div{
                 color: #5d8640;

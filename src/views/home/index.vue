@@ -27,6 +27,7 @@ export default {
     }
     .body{
         flex: 1;
+        overflow: auto;
     }
     .footer{
         height: 1rem;
