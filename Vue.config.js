@@ -7,7 +7,16 @@ module.exports = {
                 "pathRewrite":{
                     "^/wochu":""
                 }
+                
+            },
+            "/logins":{
+                "target":"http://localhost:3000",
+                "changeOrigin":true,
+                "pathRewrite":{
+                    "^/logins":""
+                }
             }
         }
-    }
+    },
+    
 }

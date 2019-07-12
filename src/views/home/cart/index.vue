@@ -1,7 +1,7 @@
 <template>
   <div class="cart">
      <div class="no-result">
-       <div> 登录</div>
+       <div @click="gologin"> 登录</div>
      </div>
      <div class="border">
        <img src="@/assets/recommend.png" alt="" class="recommend">
@@ -37,6 +37,9 @@ export default {
       }
     },
     methods: {
+      gologin(){
+        this.$router.push("/login");
+      },
       init(){
         this.$axios.get("http://api9.wochu.cn/client/v1/goods/GoodsRecommendList?parameters=%7B%22pageSize%22%3A9%2C%22pageIndex%22%3A+1%2C%22type%22%3A%221%22%7D")
         .then((data) => {
