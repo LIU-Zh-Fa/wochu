@@ -1,12 +1,33 @@
 <template> 
     <div class="register">
-        <input type="text" placeholder="用户名">
-        <input type="password" placeholder="密码" class="pass">
-        <button class="btn">注册</button>
+        <input type="text" placeholder="用户名" ref="name">
+        <input type="password" placeholder="密码" class="pass" ref="password">
+        <button class="btn" @click="login">注册</button>
     </div>
 </template>
 <script>
+
 export default {
+    methods: {
+        login(e){
+            // let OL_Action_Root='http://localhost:3000';
+	        var e = e || window.event;
+                  e.preventDefault();
+                //添加新的食品信息
+                console.log(this.$refs.name.value);
+                console.log(this.$refs.password.value)
+            let data={name:this.$refs.name.value,password:this.$refs.password.value};
+            console.log(data);
+	       if(this.$refs.name.value == "" || this.$refs.password.value == "" ) return false;	  
+                this.$axios.post('/logins/admin/food/loginadd',data,{
+                    "headers":{"Content-type":"application/json"}
+                })
+                .then((data) => {
+                    console.log(data);
+                }) 
+
+        }
+    },
     
 }
 </script>

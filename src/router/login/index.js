@@ -5,6 +5,7 @@ export default{
     path: '/login',
     name: 'Login',
     component: Login,
+    redirect: {name: 'zilogin'},
     children:[
         {
             path: '/login/login',

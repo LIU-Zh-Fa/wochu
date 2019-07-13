@@ -16,7 +16,7 @@ export default {
     },
     methods: {
         gomy(){
-            this.$router.push("/home/my")
+            this.$router.back()
         }
     },
 }
