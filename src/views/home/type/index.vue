@@ -19,7 +19,10 @@
                     <div v-if="tjList[0]">
                         <h3 class="tit" v-if="tjList[0]">{{tjList[0].name}}</h3>
                         <ul>
-                            <li v-for="(item,index) in tjList[0].children" :key="index">
+                            <li v-for="(item,index) in tjList[0].children" 
+                                :key="index"
+                                @click="goActive(item.urlType,item.url,item.name)"
+                            >
                                 <img :src="item.imgUrl">
                                 <p>{{item.name}}</p>
                             </li>
@@ -29,7 +32,10 @@
                     <div v-if="tjList[1]">
                         <h3 class="tit" v-if="tjList[1]">{{tjList[1].name}}</h3>
                         <ul>
-                            <li v-for="(item,index) in tjList[1].children" :key="index">
+                            <li v-for="(item,index) in tjList[1].children" 
+                                :key="index"
+                                @click="goActive(item.urlType,item.url,item.name)"
+                            >
                                 <img :src="item.imgUrl">
                                 <p>{{item.name}}</p>
                             </li>
@@ -42,7 +48,7 @@
                     :key="index"
                 >
                     <ul>
-                        <li v-for="(item,index) in meunobj.list" :key="index">
+                        <li v-for="(item,index) in meunobj.list" :key="index" @click="goGoodList(meunobj.parentId,item.id)">
                             <img :src="item.checkicon">
                             <p>{{item.name}}</p>
                         </li>
@@ -66,6 +72,17 @@ export default {
     methods:{
         changeMenu(id){
             this.menuId = id;
+        },
+        goActive(urlType,url,name){
+            if(urlType === "1"){
+                var actId = url.split("?")[1].split("=")[1];
+                this.$router.push("/list/active/"+actId);
+            }else if(urlType === "3"){
+                this.$router.push("/list/tjlist/"+name);
+            }
+        },
+        goGoodList(parentId,menuid){
+            this.$router.push("/list/goodlist/"+parentId+"/"+menuid);
         }
     },
     created(){

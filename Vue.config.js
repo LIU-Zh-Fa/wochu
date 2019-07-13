@@ -7,6 +7,13 @@ module.exports = {
                 "pathRewrite":{
                     "^/wochu":""
                 }
+            },
+            "/wwochu":{
+                "target":"http://wmall.wochu.cn",
+                "changeOrigin":true,
+                "pathRewrite":{
+                    "^/wwochu":""
+                }
             }
         }
     }

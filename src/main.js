@@ -7,6 +7,7 @@ import 'mint-ui/lib/style.css'
 import MintUI from 'mint-ui'
 import LazyLoad from 'vue-lazyload'
 
+
 Vue.use(LazyLoad, {
     error: require('@/assets/images/load_err.jpg'), //错误的时候显示图片
     loading: require('@/assets/images/loading.gif'), // 正在加载中的图片
@@ -17,6 +18,7 @@ Vue.use(MintUI)
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false
 
+import './module/api.js'
 new Vue({
   router,
   store,
