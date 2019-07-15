@@ -4,7 +4,7 @@
            <span></span>{{itemobj.title}}<span></span>
        </div>
        <ul class="info">
-           <li v-for="(item,index) in itemobj.items" :key="index">
+           <li v-for="(item,index) in itemobj.items" :key="index" @click="goDetail(item.source)">
                <div class="img_view">
                    <img :src="item.imgUrl">
                    <div class="mark" v-if="item.labels.length > 0">
@@ -25,7 +25,12 @@
 </template>
 <script>
 export default {
-    props:["itemobj"]
+    props:["itemobj"],
+    methods:{
+        goDetail(goodid){
+            this.$router.push("/detail/"+goodid);
+        }
+    }
 }
 </script>
 <style scoped lang="less">

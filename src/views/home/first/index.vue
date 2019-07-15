@@ -6,7 +6,7 @@
                     <img src="http://wmall.wochu.cn/h5/home/vueimg/wochuLogo.png">
                     <span>请填写地址 <img src="http://wmall.wochu.cn/h5/home/vueimg/icon.png"></span>
                 </div>
-                <div class="search">
+                <div class="search" @click="goSearch()">
                     <img src="http://wmall.wochu.cn/h5/home/vueimg/search.png">
                 </div>
             </div>
@@ -62,6 +62,11 @@ export default {
         }).then((res)=>{
             this.datalist = res.data.data.acts;
         })
+    },
+    methods:{
+        goSearch(){
+            this.$router.push("/search");
+        }
     }
 }
 </script>

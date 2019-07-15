@@ -5,7 +5,7 @@
                 <img src="http://wmall.wochu.cn/h5/hotlist/img/back.png?v=d0c1db9a95">
             </div>
             <div class="tit_right">
-                <img src="http://wmall.wochu.cn/h5/classify/img/icon-search-40@2x.png">
+                <img src="http://wmall.wochu.cn/h5/classify/img/icon-search-40@2x.png" @click="goSearch()">
                 <img src="http://wmall.wochu.cn/h5/hotlist/img/icon-cart-60@3x.png?v=80ccbcf8e7">
                 <p>67</p>
             </div>
@@ -27,7 +27,7 @@
             <div class="fg"></div>
         </div>
         <ul class="good_list" v-for="(goodlist,index) in allgoodlist" :key="index" v-show="goodlist.id == menuid">
-            <li v-for="(item,index) in goodlist.goods" :key="index">
+            <li v-for="(item,index) in goodlist.goods" :key="index" @click="goDetail(item.goodsGuid)">
                 <div class="info_left">
                     <img :src="item.picUrl">
                 </div>
@@ -85,6 +85,9 @@ export default {
         back(){ 
             this.$router.go(-1);
         },
+        goSearch(){
+            this.$router.push("/search");
+        },
         chengemenuid(id){
             this.menuid = id;
         },
@@ -99,6 +102,9 @@ export default {
                 }
             }
             this.getdata()
+        },
+        goDetail(goodid){
+            this.$router.push("/detail/"+goodid);
         }
     }
 }
@@ -250,6 +256,7 @@ export default {
                         margin-bottom: .18rem;
                         white-space: nowrap;
                         color: #666;
+                        letter-spacing: .01rem;
                     }
                     .mark{
                         overflow: hidden;
@@ -271,7 +278,6 @@ export default {
                         }
                     }
                     .price{
-                        line-height: .5rem;
                         span{
                             &:nth-child(1){
                                 color: #ff5918;

@@ -3,6 +3,10 @@ import Router from 'vue-router'
 import home from './home'
 import login from './login'
 import list from './list'
+import detail from './detail'
+import comment from './comment'
+import search from './search'
+import searchlist from './searchlist'
 Vue.use(Router)
 
 export default new Router({
@@ -11,6 +15,10 @@ export default new Router({
   routes: [
       home,
       login,
-      list
+      list,
+      detail,
+      comment,
+      search,
+      searchlist
   ]
 })

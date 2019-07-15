@@ -1,11 +1,8 @@
 <template>
     <div>
         <ul class="listone">
-            <li v-for="(item,index) in itemobj.items" :key="index" @click="goDetail(item.source)">
-                <div class="label" v-if="item.labels.length > 0">
-                    <img :src="item.labels.length > 0 ?item.labels[0].labelUrl:''">
-                </div>
-                <img :src="item.imgUrl">
+            <li v-for="(item,index) in lovelist" :key="index" @click="goDetail(item.goodsGuid)">
+                <img :src="item.picUrl">
                 <h3>{{item.goodsName}}</h3>
                 <p class="oprice">￥{{item.marketPrice}}</p>
                 <p class="price">￥{{item.price}}</p>
@@ -16,10 +13,32 @@
 </template>
 <script>
 export default {
-    props:["itemobj"],
+    props:["goodid"],
+    created(){
+        this.getData();
+    },
+    data(){
+        return {
+            lovelist:''
+        }
+    },
     methods:{
         goDetail(goodid){
             this.$router.push("/detail/"+goodid);
+        },
+        getData(){
+            this.$axios.get("/wochu/client/v1/goods/getGoodsRelevantList",{
+                params:{
+                    parameters: {"goodsGuid": this.goodid}
+                }
+            }).then((res)=>{
+                this.lovelist = res.data.data.userloving;
+            })
+        }
+    },
+    watch:{
+        goodid(newVla){
+            this.getData()
         }
     }
 }
@@ -40,17 +59,6 @@ export default {
             position: relative;
             &:nth-last-child(1){
                 padding-right: .2rem;
-            }
-            .label{
-                width: 0.6rem;
-                height: 0.6rem;
-                position: absolute;
-                top: 0;
-                left: 0;
-                img{
-                    width: 100%;
-                    height: 100%;
-                }
             }
             >img{
                 width: 1.9rem;

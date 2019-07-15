@@ -14,7 +14,7 @@
                 <img :src="item.imageUrl">
             </div>
             <ul v-if="item.templateType === 2">
-                <li v-for="(gitem,gindex) in item.shelveList" :key="gindex">
+                <li v-for="(gitem,gindex) in item.shelveList" :key="gindex" @click="goDetail(gitem.goodsGuid)">
                     <div>
                         <img :src="gitem.icon">
                         <h3>{{gitem.goodsName}}</h3>
@@ -46,6 +46,9 @@ export default {
     methods:{
         back(){
             this.$router.go(-1);
+        },
+        goDetail(goodid){
+            this.$router.push("/detail/"+goodid);
         }
     }
 }

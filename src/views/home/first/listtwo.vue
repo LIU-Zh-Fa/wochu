@@ -1,7 +1,7 @@
 <template>
     <div>
         <ul class="listtwo">
-            <li v-for="(item,index) in itemobj.items" :key="index">
+            <li v-for="(item,index) in itemobj.items" :key="index" @click="goDetail(item.source)">
                 <div :class="{'over': item.stock <= 0 }">
                     <div class="label" v-if="item.labels.length > 0">
                         <img :src="item.labels.length > 0 ?item.labels[0].labelUrl:''">
@@ -20,7 +20,12 @@
 </template>
 <script>
 export default {
-   props:["itemobj"]
+   props:["itemobj"],
+   methods:{
+       goDetail(goodid){
+            this.$router.push("/detail/"+goodid);
+        }
+   }
 }
 </script>
 <style scoped lang="less">

@@ -1,6 +1,6 @@
 <template>
     <div class="type">
-        <div class="top">
+        <div class="top" @click="goSearch()">
             <img src="http://wmall.wochu.cn/h5/classify/img/icon-search-40@2x.png">
             <div>支持首字母搜索</div>
         </div>
@@ -21,7 +21,7 @@
                         <ul>
                             <li v-for="(item,index) in tjList[0].children" 
                                 :key="index"
-                                @click="goActive(item.urlType,item.url,item.name)"
+                                @click="goActive(item.urlType,item.url,item.url)"
                             >
                                 <img :src="item.imgUrl">
                                 <p>{{item.name}}</p>
@@ -34,7 +34,7 @@
                         <ul>
                             <li v-for="(item,index) in tjList[1].children" 
                                 :key="index"
-                                @click="goActive(item.urlType,item.url,item.name)"
+                                @click="goActive(item.urlType,item.url,item.url)"
                             >
                                 <img :src="item.imgUrl">
                                 <p>{{item.name}}</p>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="menu" 
                     v-for="(meunobj,index) in menuList"
-                    v-if="meunobj.parentId === menuId"
+                    v-show="meunobj.parentId === menuId"
                     :key="index"
                 >
                     <ul>
@@ -83,6 +83,9 @@ export default {
         },
         goGoodList(parentId,menuid){
             this.$router.push("/list/goodlist/"+parentId+"/"+menuid);
+        },
+        goSearch(){
+            this.$router.push("/search");
         }
     },
     created(){

@@ -1,9 +1,19 @@
 <template>
   <div id="app">
+      <div v-if="$store.state.isLoad">
+            <Loading />
+      </div>
     <router-view/>
   </div>
 </template>
-
+<script>
+import Loading from '@/views/loading'
+export default {
+    components:{
+        Loading
+    }
+}
+</script>
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
